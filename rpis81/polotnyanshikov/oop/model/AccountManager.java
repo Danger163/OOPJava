@@ -1,7 +1,7 @@
 package rpis81.polotnyanshikov.oop.model;
 
 public class AccountManager {
-    Individual[] individuals;
+    Client[] individuals;
     int size;
 
     public boolean add(Individual individual)
@@ -14,15 +14,15 @@ public class AccountManager {
                 size=size<=i?i+1:size;
                 return true;
             }
-        Individual[] individuals1=individuals;
-        individuals=new Individual[individuals1.length*2];
+        Client[] individuals1=individuals;
+        individuals=new Client[individuals1.length*2];
         for (int i=0;i<size;i++)
             add(i,individuals1[i]);
         return add(individual);
 
     }
 
-    public boolean add(int index, Individual individual)
+    public boolean add(int index, Client individual)
     {
         if(index>=individuals.length){
             Individual[] individuals1=individuals;
@@ -37,21 +37,21 @@ public class AccountManager {
         return true;
     }
 
-    public Individual get(int index)
+    public Client get(int index)
     {
         return individuals[index];
     }
 
-    public Individual set(int index, Individual individual)
+    public Client set(int index, Client individual)
     {
-        Individual individ=individuals[index];
+        Client individ=individuals[index];
             individuals[index]=individual;
             return individ;
     }
 
-    public Individual remove(int index)
+    public Client remove(int index)
     {
-        Individual individ=individuals[index];
+        Client individ=individuals[index];
         for(;index<size-1;index++)
         individuals[index]=individuals[index+1];
         individuals[index]=null;
@@ -61,25 +61,25 @@ public class AccountManager {
     public int size()
     {
         int size=0;
-        for(Individual individual:individuals)
+        for(Client individual:individuals)
             if(individual!=null)size++;
         return size;
     }
 
-    public Individual[] getIndividuals()
+    public Client[] getClients()
     {
-        Individual[] individuals=new Individual[size()];
+        Client[] clients=new Client[size()];
         int i=0;
-        for (Individual individual:this.individuals)
+        for (Client individual:this.individuals)
             if(individual!=null)
-                individuals[i++]=individual;
-        return individuals;
+                clients[i++]=individual;
+        return clients;
     }
 
-    public Individual[] sortedByBalanceIndividuals()
+    public Client[] sortedByBalanceClientss()
     {
-        Individual[] individuals=getIndividuals().clone();
-        Individual tmp;
+        Client[] individuals=getClients().clone();
+        Client tmp;
         for (int i=0,k,f;i<individuals.length-1;i++){//Selection sort
             for( k=i+1, f=i;k<individuals.length;k++)
                 if(individuals[f].totalBalance()<individuals[k].totalBalance())
@@ -91,28 +91,28 @@ public class AccountManager {
         return individuals;
     }
 
-    public Account getAccount(String accountNumber)
+    public DebitAccount getAccount(String accountNumber)
     {
-        for (Individual individual:individuals)
+        for (Client individual:individuals)
             if(individual.hasAccount(accountNumber))
-                return individual.get(accountNumber);
+                return (DebitAccount) individual.get(accountNumber);
             return null;
     }
 
-    public Account removeAccount(String accountNumber)
+    public DebitAccount removeAccount(String accountNumber)
     {
-        for (Individual individual:individuals)
+        for (Client individual:individuals)
             if(individual.hasAccount(accountNumber))
-                return individual.remove(accountNumber);
+                return (DebitAccount) individual.remove(accountNumber);
         return null;
     }
 
-    public Account setAccount(String accountNumber, Account account)
+    public DebitAccount setAccount(String accountNumber, DebitAccount account)
     {
-        for (Individual individual:individuals)
+        for (Client individual:individuals)
             if(individual.hasAccount(accountNumber)){
                 int i=0;
-                for (Account account1:individual.getAccounts())
+                for (DebitAccount account1:individual.getAccounts())
                     if(account1.getNumber().equals(accountNumber))
                     {
                        return individual.set(i,account);
@@ -125,10 +125,10 @@ public class AccountManager {
 
     public AccountManager(int quantity)
     {
-        individuals=new Individual[quantity];
+        individuals=new Client[quantity];
     }
 
-    public AccountManager(Individual[] individuals)
+    public AccountManager(Client[] individuals)
     {
         this.individuals=individuals.clone();
     }

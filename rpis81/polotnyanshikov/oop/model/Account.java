@@ -1,37 +1,13 @@
 package rpis81.polotnyanshikov.oop.model;
 
-public class Account {
-    String number;
-    double balance;
+public interface Account {
+    String number="";
+    double balance = 0;
 
-    public String getNumber()
-    {
-        return number;
-    }
+    public String getNumber();
 
-    public void setNumber(String number)
-    {
-        this.number=number;
-    }
+    public void setNumber(String number);
 
-    public double getBalance()
-    {
-        return balance;
-    }
-    public void setBalance(double balance)
-    {
-        this.balance=balance;
-    }
-
-    public Account()
-    {
-        number="";
-        balance=0.0;
-    }
-
-    public Account(String number, double balance)
-    {
-        this.number=number;
-        this.balance=balance;
-    }
+    public double getBalance();
+    public void setBalance(double balance);
 }

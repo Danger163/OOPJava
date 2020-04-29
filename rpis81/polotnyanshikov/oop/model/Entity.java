@@ -1,7 +1,8 @@
 package rpis81.polotnyanshikov.oop.model;
 
-public class Individual implements Client{
-     DebitAccount[] accounts;
+
+public class Entity implements Client{
+    DebitAccount[] accounts;
     int size=0;
     String name;
     public boolean add( DebitAccount account)
@@ -14,20 +15,20 @@ public class Individual implements Client{
                 size=size<=i?i+1:size;
                 return true;
             }
-         DebitAccount[] accounts1=accounts;
-            accounts=new  DebitAccount[accounts1.length*2];
-            for (int i=0;i<size;i++)
-                add(i,accounts1[i]);
-            return add(account);
+        DebitAccount[] accounts1=accounts;
+        accounts=new  DebitAccount[accounts1.length*2];
+        for (int i=0;i<size;i++)
+            add(i,accounts1[i]);
+        return add(account);
 
     }
 
     public boolean add(int index,  DebitAccount account){
         if(index>=accounts.length){
-             DebitAccount[] accounts1=accounts;
-        accounts=new  DebitAccount[accounts1.length*2];
-        for (int i=0;i<size;i++)
-            add(i,accounts1[i]);
+            DebitAccount[] accounts1=accounts;
+            accounts=new  DebitAccount[accounts1.length*2];
+            for (int i=0;i<size;i++)
+                add(i,accounts1[i]);
             add(index,account);}
         else set(index,account);
 
@@ -78,14 +79,14 @@ public class Individual implements Client{
 
     public  DebitAccount set(int index,  DebitAccount account)
     {
-         DebitAccount deletedAccount=get(index);
+        DebitAccount deletedAccount=get(index);
         accounts[index]=account;
         return deletedAccount;
     }
 
     public  DebitAccount remove(int index)
     {
-         DebitAccount deletedAccount=get(index);
+        DebitAccount deletedAccount=get(index);
         for (int i=index;i<size-1;i++)
             accounts[i]=accounts[i+1];
         accounts[size-1]=null;
@@ -98,7 +99,7 @@ public class Individual implements Client{
         for (int i=0;i<size;i++) {
             if(accountNumber.equals(accounts[i].getNumber()))
             {
-               return remove(i);
+                return remove(i);
             }
         }
         return null;
@@ -130,10 +131,10 @@ public class Individual implements Client{
             for( k=i+1, f=i;k<accounts.length;k++)
                 if(accounts[f].getBalance()<accounts[k].getBalance())
                     f=k;
-                tmp=accounts[f];
-                accounts[f]=accounts[i];
-                accounts[i]=tmp;
-            }
+            tmp=accounts[f];
+            accounts[f]=accounts[i];
+            accounts[i]=tmp;
+        }
         return accounts;
     }
 
@@ -152,26 +153,6 @@ public class Individual implements Client{
 
     @Override
     public void setName(String name) {
-        this.name=name;
-    }
-
-    public Individual(String name)
-    {
-        accounts=new  DebitAccount[16];
-    }
-
-    public Individual(int length,String name)
-    {
-        accounts=new  DebitAccount[length];
-        this.name=name;
-    }
-
-    public Individual( DebitAccount[] accounts,String name)
-    {
-        this.accounts=new  DebitAccount[accounts.length];
-        for ( DebitAccount account: accounts) {
-            add(new  DebitAccount(account.getNumber(),account.getBalance()));
-        }
         this.name=name;
     }
 }
