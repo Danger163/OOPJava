@@ -2,6 +2,7 @@ package rpis81.polotnyanshikov.oop.model;
 
 public class Individual implements Client{
      DebitAccount[] accounts;
+     ClientStatus status;
     int size=0;
     String name;
     public boolean add( DebitAccount account)
@@ -153,6 +154,22 @@ public class Individual implements Client{
     @Override
     public void setName(String name) {
         this.name=name;
+    }
+
+    @Override
+    public int getClientPoints() {
+
+        return ClientStatus.valueOf(status.toString()) ;
+    }
+
+    @Override
+    public void increase(int points) {
+
+    }
+
+    @Override
+    public Account[] getCredits() {
+        return new Account[0];
     }
 
     public Individual(String name)

@@ -1,6 +1,7 @@
 package rpis81.polotnyanshikov.oop.model;
 
 public interface Client {
+     ClientStatus status=null;
     public boolean add(Account account);
     public boolean add(int index, Account account);
     public Account get(int index);
@@ -15,4 +16,14 @@ public interface Client {
     public double totalBalance();
     public String getName();
     public void setName(String name);
+    public int getClientPoints();
+    public void increase(int points);
+    public default ClientStatus getClientStatus()
+    {
+        return  status;
+    }
+
+    public Account[] getCredits();
+
+
 }

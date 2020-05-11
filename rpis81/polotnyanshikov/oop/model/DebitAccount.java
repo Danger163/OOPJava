@@ -1,37 +1,18 @@
 package rpis81.polotnyanshikov.oop.model;
 
-public class DebitAccount implements Account {
+public class DebitAccount extends AbstractAccount {
     String number;
     double balance;
 
-    public String getNumber()
-    {
-        return number;
-    }
 
-    public void setNumber(String number)
-    {
-        this.number=number;
-    }
-
-    public double getBalance()
-    {
-        return balance;
-    }
-    public void setBalance(double balance)
-    {
-        this.balance=balance;
-    }
 
     public DebitAccount()
     {
-        number="";
-        balance=0.0;
+        super();
     }
 
     public DebitAccount(String number, double balance)
     {
-        this.number=number;
-        this.balance=balance;
+        super(number, balance);
     }
 }

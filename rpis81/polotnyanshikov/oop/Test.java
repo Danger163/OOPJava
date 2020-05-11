@@ -64,4 +64,8 @@ public class Test {
     {
 
     }
+
+    public static void lab3tests(){
+
+    }
 }
