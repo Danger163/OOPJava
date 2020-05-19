@@ -4,6 +4,7 @@ public class Individual implements Client{
      DebitAccount[] accounts;
      ClientStatus status;
     int size=0;
+    int points;
     String name;
     public boolean add( DebitAccount account)
     {
@@ -159,20 +160,20 @@ public class Individual implements Client{
     @Override
     public int getClientPoints() {
 
-        return ClientStatus.valueOf(status.toString()) ;
+        return points ;
     }
 
     @Override
     public void increase(int points) {
-
+this.points+=points;
     }
 
     @Override
     public Account[] getCredits() {
-        return new Account[0];
+        return  accounts;
     }
 
-    public Individual(String name)
+    public Individual(DebitAccount[] name)
     {
         accounts=new  DebitAccount[16];
     }

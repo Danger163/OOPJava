@@ -1,5 +1,8 @@
 package rpis81.polotnyanshikov.oop.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class AccountManager {
     Client[] individuals;
     int size;
@@ -25,7 +28,7 @@ public class AccountManager {
     public boolean add(int index, Client individual)
     {
         if(index>=individuals.length){
-            Individual[] individuals1=individuals;
+            Client[] individuals1=individuals;
             individuals=new Individual[individuals.length*2];
             for (int i=0;i<size;i++)
                 add(i,individuals1[i]);
@@ -107,12 +110,12 @@ public class AccountManager {
         return null;
     }
 
-    public DebitAccount setAccount(String accountNumber, DebitAccount account)
+    public Account setAccount(String accountNumber, DebitAccount account)
     {
         for (Client individual:individuals)
             if(individual.hasAccount(accountNumber)){
                 int i=0;
-                for (DebitAccount account1:individual.getAccounts())
+                for (Account account1:individual.getAccounts())
                     if(account1.getNumber().equals(accountNumber))
                     {
                        return individual.set(i,account);
@@ -132,4 +135,23 @@ public class AccountManager {
     {
         this.individuals=individuals.clone();
     }
+
+    public Client[] getCreditedClients()
+    {
+        List<Client> clients= Arrays.asList(individuals);
+        for (Client client: clients) {
+            if(client.getCredits().length==0)clients.remove(client);
+        }
+        return clients.toArray(new Client[0]);
+    }
+
+    public Client[] getBadClients()
+    {
+        List<Client> clients= Arrays.asList(getCreditedClients());
+        for (Client client: clients) {
+            if(!client.getClientStatus().equals(ClientStatus.BAD))clients.remove(client);
+        }
+        return clients.toArray(new Client[0]);
+    }
+
 }

@@ -1,13 +1,11 @@
 package rpis81.polotnyanshikov.oop;
 
-import rpis81.polotnyanshikov.oop.model.DebitAccount;
-import rpis81.polotnyanshikov.oop.model.AccountManager;
-import rpis81.polotnyanshikov.oop.model.Individual;
+import rpis81.polotnyanshikov.oop.model.*;
 
 public class Test {
     public static void main (String[] args) {
         System.out.println("Я сделяль!");
-        lab1tests();
+
     }
 
     public static void lab1tests(){
@@ -30,9 +28,9 @@ public class Test {
 
         }
         Individual[] individuals=new Individual[3];
-        individuals[0]=new Individual();
-        individuals[1]=new Individual(3);
-        individuals[2]=new Individual(accounts);
+     //   individuals[0]=new Individual();
+      //  individuals[1]=new Individual(3);
+      //  individuals[2]=new Individual(accounts);
 
         for (DebitAccount account:  individuals[2].getAccounts()) {
             System.out.format("Номер счета: %s \nТекущий баланс: %s\n\n",account.getNumber(),account.getBalance());
@@ -54,7 +52,10 @@ public class Test {
         accountManagers[0]=new AccountManager(13);
         accountManagers[1]=new AccountManager(individuals);
 
-        for (DebitAccount account:  accountManagers[1].get(2).getAccounts()) {
+
+
+
+        for (Account account:  accountManagers[1].get(2).getAccounts()) {
             System.out.format("Номер счета: %s \nТекущий баланс: %s\n\n",account.getNumber(),account.getBalance());
 
         }
@@ -66,6 +67,13 @@ public class Test {
     }
 
     public static void lab3tests(){
-
+AccountManager manager=new AccountManager(3);
+manager.set(0, new Individual(1,"who") );
+manager.set(1, new Individual(1,"who") );
+manager.get(1).increase(-10);
+manager.set(2, new Individual(1,"who") );
+        manager.get(2).increase(10);
+        System.out.println(manager.getCreditedClients());
+        System.out.println(manager.getBadClients());
     }
 }

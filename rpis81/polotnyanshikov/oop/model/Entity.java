@@ -5,6 +5,7 @@ public class Entity implements Client{
     DebitAccount[] accounts;
     int size=0;
     String name;
+    int points;
     public boolean add( DebitAccount account)
     {
 
@@ -154,5 +155,21 @@ public class Entity implements Client{
     @Override
     public void setName(String name) {
         this.name=name;
+    }
+
+    @Override
+    public int getClientPoints() {
+
+        return points ;
+    }
+
+    @Override
+    public void increase(int points) {
+        this.points+=points;
+    }
+
+    @Override
+    public Account[] getCredits() {
+        return  accounts;
     }
 }
