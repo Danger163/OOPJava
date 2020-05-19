@@ -146,6 +146,14 @@ public class Entity implements Client{
             sum+=account.getBalance();
         return sum;
     }
+    public Entity( DebitAccount[] accounts,String name)
+    {
+        this.accounts=new  DebitAccount[accounts.length];
+        for ( DebitAccount account: accounts) {
+            add(new  DebitAccount(account.getNumber(),account.getBalance()));
+        }
+        this.name=name;
+    }
 
     @Override
     public String getName() {
@@ -171,5 +179,38 @@ public class Entity implements Client{
     @Override
     public Account[] getCredits() {
         return  accounts;
+    }
+
+    @Override
+    public String toString() {
+        String s= String.format("Client\nname:%s\ncreditScore: %s\n");
+
+        for (DebitAccount account:accounts) {
+            s+=account.toString()+'\n';
+        }
+        return String.format("%stotal: %d",s,totalBalance());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash=0;
+        for (DebitAccount account:accounts) {
+            hash^=account.hashCode();
+        }
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        for (int i=0;i<accounts.length;i++) {
+            if(!accounts[i].equals(((DebitAccount[]) obj)[i]))return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Entity(accounts,name);
     }
 }

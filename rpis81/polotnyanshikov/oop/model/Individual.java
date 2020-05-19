@@ -192,4 +192,36 @@ this.points+=points;
         }
         this.name=name;
     }
+
+    @Override
+    public String toString() {
+        String s= String.format("Client\nname:%s\ncreditScore: %s\n");
+
+        for (DebitAccount account:accounts) {
+            s+=account.toString()+'\n';
+        }
+        return String.format("%stotal: %d",s,totalBalance());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash=0;
+        for (DebitAccount account:accounts) {
+            hash^=account.hashCode();
+        }
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        for (int i=0;i<accounts.length;i++) {
+            if(!accounts[i].equals(((DebitAccount[]) obj)[i]))return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Individual(accounts,name);
+    }
 }

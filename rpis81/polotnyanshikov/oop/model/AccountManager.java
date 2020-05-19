@@ -154,4 +154,13 @@ public class AccountManager {
         return clients.toArray(new Client[0]);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder=new StringBuilder();
+        for (Client account:getClients()) {
+            builder.append(account.toString());
+            builder.append('\n');
+        }
+        return builder.toString();
+    }
 }

@@ -15,4 +15,18 @@ public class DebitAccount extends AbstractAccount {
     {
         super(number, balance);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Debit account - number: %s balance: %d",number,balance);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode()*53;
+    }
+
+    protected Object clone()throws CloneNotSupportedException{
+        throw new CloneNotSupportedException();
+    }
 }

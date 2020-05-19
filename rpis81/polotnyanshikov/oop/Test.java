@@ -76,4 +76,15 @@ manager.set(2, new Individual(1,"who") );
         System.out.println(manager.getCreditedClients());
         System.out.println(manager.getBadClients());
     }
+
+    public static void lab4tests()
+    {
+        AccountManager manager=new AccountManager(3);
+        manager.set(0, new Individual(1,"who") );
+        manager.set(1, new Individual(1,"who") );
+        manager.get(1).increase(-10);
+        manager.set(2, new Individual(1,"who") );
+        manager.get(2).increase(10);
+        System.out.println(manager.toString());
+    }
 }
