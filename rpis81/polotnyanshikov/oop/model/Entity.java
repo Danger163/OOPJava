@@ -1,6 +1,10 @@
 package rpis81.polotnyanshikov.oop.model;
 
 
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.util.Iterator;
+
 public class Entity implements Client{
     DebitAccount[] accounts;
     int size=0;
@@ -127,15 +131,7 @@ public class Entity implements Client{
     public  DebitAccount[] sortedAccountsByBalance()
     {
         DebitAccount[] accounts=getAccounts().clone();
-        DebitAccount tmp;
-        for (int i=0,k,f;i<accounts.length-1;i++){//Selection sort
-            for( k=i+1, f=i;k<accounts.length;k++)
-                if(accounts[f].getBalance()<accounts[k].getBalance())
-                    f=k;
-            tmp=accounts[f];
-            accounts[f]=accounts[i];
-            accounts[i]=tmp;
-        }
+        java.util.Arrays.sort(accounts);
         return accounts;
     }
 
@@ -150,7 +146,7 @@ public class Entity implements Client{
     {
         this.accounts=new  DebitAccount[accounts.length];
         for ( DebitAccount account: accounts) {
-            add(new  DebitAccount(account.getNumber(),account.getBalance()));
+            add(new  DebitAccount(account.getNumber(),account.getBalance(), LocalDate.now()));
         }
         this.name=name;
     }
@@ -212,5 +208,23 @@ public class Entity implements Client{
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return new Entity(accounts,name);
+    }
+
+    @Override
+    public Iterator<Account> iterator() {
+        return null;
+    }
+
+    class AccountIterator implements Iterator<Account>{
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Account next() {
+            return null;
+        }
     }
 }

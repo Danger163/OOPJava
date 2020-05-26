@@ -96,4 +96,9 @@ manager.set(2, new Individual(1,"who") );
        CreditAccount acc1=new CreditAccount("123124234235325345", -234,2, LocalDate.now().plusMonths(42));
         System.out.format("Pay %d at %d", acc1.nextPayment(),acc1.nextPaymentDate());
     }
+
+    public static void lab6tests()
+    {
+       lab1tests();//потому что переработаны методы созданные в 1 лабораторной
+    }
 }

@@ -2,7 +2,7 @@ package rpis81.polotnyanshikov.oop.model;
 
 import java.time.LocalDate;
 
-public interface Account {
+public interface Account extends Comparable<Account> {
     String number="";
     double balance = 0;
 

@@ -1,9 +1,10 @@
 package rpis81.polotnyanshikov.oop.model;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-public class AccountManager {
+public class AccountManager implements Iterable<Client>{
     Client[] individuals;
     int size;
 
@@ -165,5 +166,10 @@ public class AccountManager {
             builder.append('\n');
         }
         return builder.toString();
+    }
+
+    @Override
+    public Iterator<Client> iterator() {
+        return null;
     }
 }

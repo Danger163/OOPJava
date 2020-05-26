@@ -89,4 +89,8 @@ public abstract class AbstractAccount implements Account, Cloneable{
        return expirationDate.minusYears(LocalDate.now().getYear()).minusMonths(LocalDate.now().getMonthValue()).getMonthValue();
     }
 
+    @Override
+    public int compareTo(Account o) {
+        return (int) (o.getBalance()-this.getBalance());
+    }
 }
