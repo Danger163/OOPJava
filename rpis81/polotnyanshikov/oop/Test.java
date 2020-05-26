@@ -2,6 +2,8 @@ package rpis81.polotnyanshikov.oop;
 
 import rpis81.polotnyanshikov.oop.model.*;
 
+import java.time.LocalDate;
+
 public class Test {
     public static void main (String[] args) {
         System.out.println("Я сделяль!");
@@ -86,5 +88,12 @@ manager.set(2, new Individual(1,"who") );
         manager.set(2, new Individual(1,"who") );
         manager.get(2).increase(10);
         System.out.println(manager.toString());
+    }
+
+    public static void lab5tests()
+    {
+       DebitAccount acc=new DebitAccount("123124234235325345",0,  LocalDate.now());
+       CreditAccount acc1=new CreditAccount("123124234235325345", -234,2, LocalDate.now().plusMonths(42));
+        System.out.format("Pay %d at %d", acc1.nextPayment(),acc1.nextPaymentDate());
     }
 }

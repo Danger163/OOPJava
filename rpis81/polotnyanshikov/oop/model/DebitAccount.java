@@ -1,5 +1,7 @@
 package rpis81.polotnyanshikov.oop.model;
 
+import java.time.LocalDate;
+
 public class DebitAccount extends AbstractAccount {
     String number;
     double balance;
@@ -11,9 +13,14 @@ public class DebitAccount extends AbstractAccount {
         super();
     }
 
-    public DebitAccount(String number, double balance)
+    public DebitAccount(String number, double balance,LocalDate expirationDate)
     {
-        super(number, balance);
+        super(number, balance,expirationDate);
+        if(balance<0)throw new IllegalArgumentException();
+        if(balance>0)throw new IllegalArgumentException();
+        if(number.length()!=20||number.substring(0,1)!="40") throw new InvalidAccountNumberException();
+        if(number.substring(5,7)!="810")throw new IllegalArgumentException();
+
     }
 
     @Override
@@ -28,5 +35,23 @@ public class DebitAccount extends AbstractAccount {
 
     protected Object clone()throws CloneNotSupportedException{
         throw new CloneNotSupportedException();
+    }
+
+    LocalDate creationDate;
+    LocalDate expirationDate;
+
+    public LocalDate getCreationDate(){
+        return creationDate;
+    }
+    public LocalDate getExpirationDate(){
+        return expirationDate;
+    }
+    public void setExpirationDate(LocalDate expirationDate){
+        if(expirationDate==null) throw new NullPointerException();
+        if(expirationDate.isBefore(expirationDate))throw new java.lang.IllegalArgumentException();
+        this.expirationDate=expirationDate;
+    }
+    public int monthesQuantityBeforeExpiration(){
+        return expirationDate.minusYears(LocalDate.now().getYear()).minusMonths(LocalDate.now().getMonthValue()).getMonthValue();
     }
 }

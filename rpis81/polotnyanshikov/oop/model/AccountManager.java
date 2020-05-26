@@ -27,6 +27,7 @@ public class AccountManager {
 
     public boolean add(int index, Client individual)
     {
+        if(index<0)throw new IndexOutOfBoundsException();
         if(index>=individuals.length){
             Client[] individuals1=individuals;
             individuals=new Individual[individuals.length*2];
@@ -47,6 +48,7 @@ public class AccountManager {
 
     public Client set(int index, Client individual)
     {
+        if(index<0||individuals.length<index)throw new IndexOutOfBoundsException();
         Client individ=individuals[index];
             individuals[index]=individual;
             return individ;
@@ -54,6 +56,7 @@ public class AccountManager {
 
     public Client remove(int index)
     {
+        if(index<0||individuals.length<index)throw new IndexOutOfBoundsException();
         Client individ=individuals[index];
         for(;index<size-1;index++)
         individuals[index]=individuals[index+1];
