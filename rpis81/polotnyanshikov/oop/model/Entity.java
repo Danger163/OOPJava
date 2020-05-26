@@ -3,7 +3,7 @@ package rpis81.polotnyanshikov.oop.model;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.Iterator;
+import java.util.*;
 
 public class Entity implements Client{
     DebitAccount[] accounts;
@@ -45,6 +45,36 @@ public class Entity implements Client{
     @Override
     public boolean add(Account account) {
         return add((DebitAccount)account );
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Account> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
     }
 
     @Override
@@ -118,22 +148,32 @@ public class Entity implements Client{
         return size;
     }
 
-    public  DebitAccount[] getAccounts()
-    {
-        DebitAccount[] accounts=new  DebitAccount[size()];
-        int i=0;
-        for ( DebitAccount account:this.accounts)
-            if(account!=null)
-                accounts[i++]=account;
-        return accounts;
+    @Override
+    public boolean isEmpty() {
+        return accounts.length==0;
     }
 
-    public  DebitAccount[] sortedAccountsByBalance()
+    @Override
+    public boolean contains(Object o) {
+        for (DebitAccount acc:accounts){
+        if(acc.equals(o))return true;
+        }
+        return false;
+    }
+
+    public  DebitAccount[] getAccounts()
+    {
+       return (DebitAccount[]) toArray();
+    }
+
+    public ArrayList<Account> sortedAccountsByBalance()
     {
         DebitAccount[] accounts=getAccounts().clone();
         java.util.Arrays.sort(accounts);
-        return accounts;
-    }
+        ArrayList<Account > acc= new ArrayList<>();
+        acc.addAll(Arrays.asList(accounts));
+        return acc;
+}
 
     public double totalBalance()
     {
@@ -212,6 +252,16 @@ public class Entity implements Client{
 
     @Override
     public Iterator<Account> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return accounts;
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
         return null;
     }
 

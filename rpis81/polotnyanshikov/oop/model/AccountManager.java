@@ -1,8 +1,6 @@
 package rpis81.polotnyanshikov.oop.model;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class AccountManager implements Iterable<Client>{
     Client[] individuals;
@@ -83,19 +81,15 @@ public class AccountManager implements Iterable<Client>{
         return clients;
     }
 
-    public Client[] sortedByBalanceClientss()
+    public Collection<Credit> sortedByBalanceClientss()
     {
         Client[] individuals=getClients().clone();
-        Client tmp;
-        for (int i=0,k,f;i<individuals.length-1;i++){//Selection sort
-            for( k=i+1, f=i;k<individuals.length;k++)
-                if(individuals[f].totalBalance()<individuals[k].totalBalance())
-                    f=k;
-            tmp=individuals[f];
-            individuals[f]=individuals[i];
-            individuals[i]=tmp;
+        Arrays.sort(individuals);
+        LinkedList<Credit> list=new LinkedList<>();
+        for (Client client: individuals) {
+            list.add((Credit) client);
         }
-        return individuals;
+        return list;
     }
 
     public DebitAccount getAccount(String accountNumber)
@@ -140,18 +134,19 @@ public class AccountManager implements Iterable<Client>{
         this.individuals=individuals.clone();
     }
 
-    public Client[] getCreditedClients()
+    public Set<Client> getCreditedClients()
     {
         List<Client> clients= Arrays.asList(individuals);
         for (Client client: clients) {
             if(client.getCredits().length==0)clients.remove(client);
         }
-        return clients.toArray(new Client[0]);
+        HashSet<Client> hashSet=new HashSet<>(clients);
+        return hashSet;
     }
 
     public Client[] getBadClients()
     {
-        List<Client> clients= Arrays.asList(getCreditedClients());
+        HashSet<Client> clients= (HashSet<Client>) getCreditedClients();
         for (Client client: clients) {
             if(!client.getClientStatus().equals(ClientStatus.BAD))clients.remove(client);
         }

@@ -1,6 +1,9 @@
 package rpis81.polotnyanshikov.oop.model;
 
-public interface Client extends Iterable<Account>{
+import java.util.Collection;
+import java.util.List;
+
+public interface Client extends Iterable<Account>, Collection<Account> {
      ClientStatus status=null;
     public boolean add(Account account);
     public boolean add(int index, Account account);
@@ -12,7 +15,7 @@ public interface Client extends Iterable<Account>{
     public Account remove(String accountNumber);
     public int size();
     public Account[] getAccounts();
-    public Account[] sortedAccountsByBalance();
+    public List<Account> sortedAccountsByBalance();
     public double totalBalance();
     public String getName();
     public void setName(String name);
